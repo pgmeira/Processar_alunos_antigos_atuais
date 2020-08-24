@@ -1,0 +1,16 @@
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.csprojAssemblyReference.cache
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Interop.Microsoft.Office.Interop.Excel.dll
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.csproj.ResolveComReference.cache
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.AssemblyInfoInputs.cache
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.AssemblyInfo.cs
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.csproj.CoreCompileInputs.cache
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\bin\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.exe
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\bin\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.deps.json
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\bin\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.runtimeconfig.json
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\bin\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.runtimeconfig.dev.json
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\bin\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.dll
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\bin\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.pdb
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\bin\Debug\netcoreapp3.1\Interop.Microsoft.Office.Interop.Excel.dll
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.dll
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.pdb
+C:\Users\pgmei\OneDrive\Projectos\Processar_alunos_antigos_atuais\ConsoleApp1\obj\Debug\netcoreapp3.1\Processar_alunos_antigos_atuais.genruntimeconfig.cache

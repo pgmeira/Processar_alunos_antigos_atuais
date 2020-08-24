@@ -1,0 +1,21 @@
+﻿Classes
+	Aluno
+		ano_letivo
+		processo
+	Lst_Aluno
+		lista
+		conjunto
+
+Instancias
+	Aluno_AA = aluno do ano anterior
+	Aluno_AC =  aluno do ano corrente
+	Lst_AAA = alunos do ano anterior
+	Lst_AAC = alunos do ano corrente
+
+2020/07/21
+Está a limpar os conjuntos dos dados lidos
+
+2020/07/22
+Processado
+Confirmar resultados através de folha de cálculo
+
