@@ -182,6 +182,7 @@ namespace ConsoleApp1
                 Console.ReadKey();
                 return;
             }
+            Console.WriteLine("escrita: " + encoding_dos_fich_lidos.EncodingName);
             StreamWriter sw = new StreamWriter(p_nome_do_ficheiro, false, encoding_dos_fich_lidos);
             sw.WriteLine(p_primeira_linha);
             string str_aux_1 = String.Empty;
@@ -205,6 +206,7 @@ namespace ConsoleApp1
             using (StreamReader parser = new StreamReader(p_nome_do_csv))
             {
                 encoding_dos_fich_lidos = parser.CurrentEncoding;
+                Console.WriteLine("leitura: "+encoding_dos_fich_lidos.EncodingName);
                 // para cada registo do CSV
                 while (!parser.EndOfStream)
                 {
