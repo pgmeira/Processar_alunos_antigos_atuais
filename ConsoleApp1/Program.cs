@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Text;
 
 namespace ConsoleApp1
 {
@@ -31,15 +32,15 @@ namespace ConsoleApp1
         static TimeSpan
             duracao;
 
-        static bool 
+        static bool
             teste_de_tempo_de_execucao = false;
 
         static string
              prim_input = String.Empty,
              prim_output = String.Empty;
-        
+
         static Constants1
-            consts= new Constants1();
+            consts = new Constants1();
 
         static Lst_Alunos
             lst_aaa = new Lst_Alunos(),
@@ -50,10 +51,12 @@ namespace ConsoleApp1
             alunos_que_sairam = new System.Collections.Generic.HashSet<int>(),
             alunos_novos = new System.Collections.Generic.HashSet<int>();
 
+        static Encoding encoding_dos_fich_lidos;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Teste de tempo de execução: (S/*) ");
-            teste_de_tempo_de_execucao = Console.ReadLine() == "S";
+            //Console.WriteLine("Teste de tempo de execução: (S/*) ");
+            //teste_de_tempo_de_execucao = Console.ReadLine() == "S";
             Ler_alunos_do_ano_anterior();
             Ler_alunos_do_ano();
             inicio = DateTime.Now;
@@ -65,7 +68,7 @@ namespace ConsoleApp1
             Console.WriteLine("Execução: " + duracao.ToString());
             Processar_CSV(alunos_novos, lst_aac, "Nome do CSV com os alunos novos: ", "active"); // Processar CSV dos que entraram
             Processar_CSV(alunos_que_sairam, lst_aaa, "Nome do CSV com os alunos que sairam: ", "suspended"); // Processar CSV dos que sairam
-       }
+        }
 
         private static void Processar_CSV(HashSet<int> p_alunos, Lst_Alunos p_lista, string p_texto, string p_estado)
         {
@@ -100,6 +103,9 @@ namespace ConsoleApp1
                         lst_reg.Add(registo.senha);
                         lst_reg.Add(consts.UNIDADE_ORGANICA_ALUNOS);
                         lst_reg.Add(p_estado);
+                        lst_reg.Add(registo.escola);
+                        lst_reg.Add(registo.ano);
+                        lst_reg.Add(registo.turma);
                         lst_csv.Add(lst_reg);
                     }
                 }
@@ -109,18 +115,20 @@ namespace ConsoleApp1
 
         private static void Ler_alunos_do_ano_anterior()
         {
-            prim_input = String.Empty;
-            while(!File.Exists(prim_input))
-                prim_input = Aceitar_nome_do_ficheiro("Primeiro input: ");
+            //prim_input = String.Empty;
+            //while(!File.Exists(prim_input))
+            //    prim_input = Aceitar_nome_do_ficheiro("Primeiro input: ");
+            prim_input = "2019_2020.csv";
             lst_aaa = Ler_ficheiro(prim_input);
             Console.WriteLine("Nº de alunos do ano anterior: " + lst_aaa.lista.Count.ToString());
         }
 
         private static void Ler_alunos_do_ano()
         {
-            prim_input = String.Empty;
-            while (!File.Exists(prim_input))
-                prim_input = Aceitar_nome_do_ficheiro("Segundo input: ");
+            //prim_input = String.Empty;
+            //while (!File.Exists(prim_input))
+            //    prim_input = Aceitar_nome_do_ficheiro("Segundo input: ");
+            prim_input = "2020_2021.csv";
             lst_aac = Ler_ficheiro(prim_input);
             Console.WriteLine("Nº de alunos do ano corrente: " + lst_aac.lista.Count.ToString());
 
@@ -155,26 +163,27 @@ namespace ConsoleApp1
 
         private static void Gravar_ficheiro(string p_nome_do_ficheiro, List<List<string>> p_lst_csv, string p_primeira_linha)
         {
-        /*
-         * se não tem nada para gravar
-         *  avisa
-         *  termina
-         * senão
-         *  abre ficheiro com o nome previamente aceite
-         *  escreve o cabeçalho do ficheiro
-         *  percorre a lista de linhas
-         *  para cada linha
-         *      constroi o registo
-         *      grava o registo
-         *  fecha o ficheiro
-         */
+            /*
+             * se não tem nada para gravar
+             *  avisa
+             *  termina
+             * senão
+             *  abre ficheiro com o nome previamente aceite
+             *  escreve o cabeçalho do ficheiro
+             *  percorre a lista de linhas
+             *  para cada linha
+             *      constroi o registo
+             *      grava o registo
+             *  fecha o ficheiro
+             */
             if (p_lst_csv.Count <= 0)
             {
                 Console.WriteLine("Nada para ser gravado.");
                 Console.ReadKey();
                 return;
             }
-            StreamWriter sw = new StreamWriter(p_nome_do_ficheiro, false);
+            Console.WriteLine("escrita: " + encoding_dos_fich_lidos.EncodingName);
+            StreamWriter sw = new StreamWriter(p_nome_do_ficheiro, false, encoding_dos_fich_lidos);
             sw.WriteLine(p_primeira_linha);
             string str_aux_1 = String.Empty;
             foreach (List<string> aluno in p_lst_csv)
@@ -190,43 +199,63 @@ namespace ConsoleApp1
 
         private static Lst_Alunos Ler_ficheiro(string p_nome_do_csv)
         {
+            /*
+             * Utiliza um StreamReader
+             * guardar o enconding do ficheiro aberto para a gravação
+             * para cada registo do CSV
+             *  se não é a linha de cabeçalhos
+             *      preenche matriz de dados
+             *      se não é cabeçalho
+             *          processa novo aluno
+             *              ano letivo
+             *              nº de processo
+             *              nome completo
+             *              email
+             *              senha
+             *              unidade organica
+             *              escola
+             *              ano escolar
+             *              turma                            
+             *          adiciona à lista
+             *      se a lista tem registos
+             *          constroi conjunto
+             *      senão
+             *          avisa que está vazia
+             * devolve a lista construída (vazia ou não)
+             */
+
             Lst_Alunos lista = new Lst_Alunos();
             Int16 res = 0;
 
             // ler o CSV
-            using (TextFieldParser parser = new TextFieldParser(p_nome_do_csv))
+            using (StreamReader parser = new StreamReader(p_nome_do_csv))
             {
-                // configurar tipo de CSV
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(";");
-                // para cada registo do CSV
-                while (!parser.EndOfData)
+                encoding_dos_fich_lidos = parser.CurrentEncoding;                
+                while (!parser.EndOfStream)
                 {
-                    string[] dados = parser.ReadFields();
-                    // se não é a linha de cabeçalhos
+                    string[] dados = parser.ReadLine().ToString().Split(';');                    
                     if (Int16.TryParse(dados[0], out res))
                     {
-                        // processa novo aluno
                         Aluno aluno = new Aluno(
                             res, // ano letivo
                             Int16.Parse(dados[1]), // nº de processo
                             dados[2].ToString(), // nome completo
                             String.Empty, // email
                             String.Empty, // senha
-                            consts.UNIDADE_ORGANICA_ALUNOS // unidade organica
-                            );
-                        // adicina à lista
+                            consts.UNIDADE_ORGANICA_ALUNOS, // unidade organica
+                            dados[3].ToString(), // escola
+                            dados[4].ToString(), // ano escolar
+                            dados[5].ToString() // turma                            
+                            ) ;
                         lista.lista.Add(aluno);
                     }
                 }
-                // se a lista tem registos
                 if (lista.lista != null)
                 {
                     if (lista.lista.Count > 0)
-                        // constroi conjunto
                         lista.Constroi_conjunto();
                 }
-                else // se falhou ...
+                else
                     Console.WriteLine("Não li nada");
             }
             return lista;

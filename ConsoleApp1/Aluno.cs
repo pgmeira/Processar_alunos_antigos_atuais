@@ -28,6 +28,9 @@ namespace ConsoleApp1
             }
         public string unidade { get; set; }
         public string situacao { get; set; }
+        public string escola{ get; set; }
+        public string ano { get; set; }
+        public string turma{ get; set; }
 
         private void Gerar_senha()
         {
@@ -42,7 +45,7 @@ namespace ConsoleApp1
         /// <param name="p_email"> Email </param>
         /// <param name="p_senha"> Senha </param>
         /// <param name="p_unidade"> Unidade orgânica </param>
-        public Aluno(int p_ano, int p_processo,string p_nome_completo,string p_email,string p_senha,string p_unidade)
+        public Aluno(int p_ano, int p_processo,string p_nome_completo,string p_email,string p_senha,string p_unidade, string p_escola, string p_ano_escolar, string p_turma)
         {
             ano_letivo = p_ano;
             processo = p_processo;
@@ -50,6 +53,9 @@ namespace ConsoleApp1
             email = p_email;
             senha = p_senha;
             unidade = p_unidade;
+            escola = p_escola;
+            ano = p_ano_escolar;
+            turma = p_turma;
             primeiro_nome = p_nome_completo.Substring(0, p_nome_completo.IndexOf(' '));
             apelido= p_nome_completo.Substring(p_nome_completo.IndexOf(' '));
         }
