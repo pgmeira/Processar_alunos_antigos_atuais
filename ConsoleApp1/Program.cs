@@ -7,11 +7,17 @@
  *          ano letivo
  *          processo
  *          nome
- *  OS CSV devem vir filtrados só com os alunos inscritos
+ *          escola
+ *          ano escolar
+ *          turma
+ *  OS CSV devem vir filtrados só com os alunos inscritos (situação = X)
  *  
  * Grava 
  *      CSV GMAIL com os alunos que entraram
  *      CSV GMAIL com os alunos que sairam
+ *      
+ *      as colunas a mais para o GMail servem para a lista alunos que precisam de cartões
+ *      e para a divisão por turmas
  */
 
 using Microsoft.VisualBasic.FileIO;
@@ -182,7 +188,6 @@ namespace ConsoleApp1
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("escrita: " + encoding_dos_fich_lidos.EncodingName);
             StreamWriter sw = new StreamWriter(p_nome_do_ficheiro, false, encoding_dos_fich_lidos);
             sw.WriteLine(p_primeira_linha);
             string str_aux_1 = String.Empty;
@@ -199,22 +204,42 @@ namespace ConsoleApp1
 
         private static Lst_Alunos Ler_ficheiro(string p_nome_do_csv)
         {
+            /*
+             * Utiliza um StreamReader
+             * guardar o enconding do ficheiro aberto para a gravação
+             * para cada registo do CSV
+             *  se não é a linha de cabeçalhos
+             *      preenche matriz de dados
+             *      se não é cabeçalho
+             *          processa novo aluno
+             *              ano letivo
+             *              nº de processo
+             *              nome completo
+             *              email
+             *              senha
+             *              unidade organica
+             *              escola
+             *              ano escolar
+             *              turma                            
+             *          adiciona à lista
+             *      se a lista tem registos
+             *          constroi conjunto
+             *      senão
+             *          avisa que está vazia
+             * devolve a lista construída (vazia ou não)
+             */
+
             Lst_Alunos lista = new Lst_Alunos();
             Int16 res = 0;
 
-            // ler o CSV
             using (StreamReader parser = new StreamReader(p_nome_do_csv))
             {
                 encoding_dos_fich_lidos = parser.CurrentEncoding;
-                Console.WriteLine("leitura: "+encoding_dos_fich_lidos.EncodingName);
-                // para cada registo do CSV
                 while (!parser.EndOfStream)
                 {
                     string[] dados = parser.ReadLine().ToString().Split(';');
-                    // se não é a linha de cabeçalhos
                     if (Int16.TryParse(dados[0], out res))
                     {
-                        // processa novo aluno
                         Aluno aluno = new Aluno(
                             res, // ano letivo
                             Int16.Parse(dados[1]), // nº de processo
@@ -225,19 +250,17 @@ namespace ConsoleApp1
                             dados[3].ToString(), // escola
                             dados[4].ToString(), // ano escolar
                             dados[5].ToString() // turma                            
-                            ) ;
-                        // adicina à lista
+                            );
+
                         lista.lista.Add(aluno);
                     }
                 }
-                // se a lista tem registos
                 if (lista.lista != null)
                 {
                     if (lista.lista.Count > 0)
-                        // constroi conjunto
                         lista.Constroi_conjunto();
                 }
-                else // se falhou ...
+                else
                     Console.WriteLine("Não li nada");
             }
             return lista;

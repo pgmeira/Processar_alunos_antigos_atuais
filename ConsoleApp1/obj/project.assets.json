@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\pgmei\\.nuget\\packages\\": {}
+    "C:\\Users\\Pte\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pgmei\\OneDrive\\Projectos\\Processar_alunos_antigos_atuais\\ConsoleApp1\\Processar_alunos_antigos_atuais.csproj",
+      "projectUniqueName": "C:\\Users\\Pte\\Documents\\GitHub\\Processar_alunos_antigos_atuais\\ConsoleApp1\\Processar_alunos_antigos_atuais.csproj",
       "projectName": "Processar_alunos_antigos_atuais",
-      "projectPath": "C:\\Users\\pgmei\\OneDrive\\Projectos\\Processar_alunos_antigos_atuais\\ConsoleApp1\\Processar_alunos_antigos_atuais.csproj",
-      "packagesPath": "C:\\Users\\pgmei\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pgmei\\OneDrive\\Projectos\\Processar_alunos_antigos_atuais\\ConsoleApp1\\obj\\",
+      "projectPath": "C:\\Users\\Pte\\Documents\\GitHub\\Processar_alunos_antigos_atuais\\ConsoleApp1\\Processar_alunos_antigos_atuais.csproj",
+      "packagesPath": "C:\\Users\\Pte\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pte\\Documents\\GitHub\\Processar_alunos_antigos_atuais\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pgmei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pte\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
